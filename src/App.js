@@ -1,23 +1,38 @@
-import logo from "./logo.svg";
-import "@aws-amplify/ui-react/styles.css";
-import {
-  withAuthenticator,
-  Button,
-  Heading,
-  Image,
-  View,
-  Card,
-} from "@aws-amplify/ui-react";
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { API, Storage } from "aws-amplify";
+import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 
-function App({ signOut }) {
+function App() {
+
+  const [fileData, setFileData] = useState();
+  const [fileStatus, setFileStatus] = useState(false);
+
+
+  const uploadFile = async () => {
+    const result = await Storage.put(fileData.name, fileData, {
+      contentType: fileData.type,
+    });
+    setFileStatus(true);
+    console.log(21, result);
+  };
+
+
   return (
-    <View className="App">
-      <Card>
-        <Image src={logo} className="App-logo" alt="logo" />
-        <Heading level={1}>We now have Auth!</Heading>
-      </Card>
-      <Button onClick={signOut}>Sign Out</Button>
-    </View>
+    <div className="App">
+      <h1>Nüber</h1>
+
+      <div>
+        <p>Testing file upload</p>
+        <input type="file" onChange={(e) => setFileData(e.target.files[0])} />
+      </div>
+      <div>
+        <button onClick={uploadFile}>Upload File</button>
+      </div>
+      {fileStatus ? "File uploaded successfully" : ""}
+
+      <AmplifySignOut />
+    </div>
   );
 }
 
