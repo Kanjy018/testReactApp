@@ -1,4 +1,15 @@
 export type AmplifyDependentResourcesAttributes = {
+    "auth": {
+        "Assignment1Cloud": {
+            "IdentityPoolId": "string",
+            "IdentityPoolName": "string",
+            "UserPoolId": "string",
+            "UserPoolArn": "string",
+            "UserPoolName": "string",
+            "AppClientIDWeb": "string",
+            "AppClientID": "string"
+        }
+    },
     "storage": {
         "imagestorage": {
             "BucketName": "string",
