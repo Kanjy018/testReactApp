@@ -3,7 +3,7 @@ set -e
 IFS='|'
 
 help_output () {
-    echo "usage: amplify-push <--environment|-e staging> <--simple|-s>"
+    echo "usage: amplify-push <--environment|-e <staging>> <--simple|-s>"
     echo "  --environment  The name of the Amplify environment to use"
     echo "  --simple  Optional simple flag auto-includes stack info from env cache"
     exit 1
@@ -21,7 +21,7 @@ init_env () {
     if [[ -z ${STACKINFO} ]];
     then
         echo "# Initializing new Amplify environment: ${ENV} (amplify init)"
-        [[ -z ${CATEGORIES} ]] && amplify init --amplify ${AMPLIFY} --providers ${PROVIDERS} --codegen ${CODEGEN} --yes --minify || amplify init --amplify ${AMPLIFY} --providers ${PROVIDERS} --codegen ${CODEGEN} --categories ${CATEGORIES} --yes --minify
+        [[ -z ${CATEGORIES} ]] && amplify init --amplify ${AMPLIFY} --providers ${PROVIDERS} --codegen ${CODEGEN} --yes || amplify init --amplify ${AMPLIFY} --providers ${PROVIDERS} --codegen ${CODEGEN} --categories ${CATEGORIES} --yes
         echo "# Environment ${ENV} details:"
         amplify env get --name ${ENV}
     else
@@ -29,7 +29,7 @@ init_env () {
         echo "# Importing Amplify environment: ${ENV} (amplify env import)"
         amplify env import --name ${ENV} --config "${STACKINFO}" --awsInfo ${AWSCONFIG} --yes;
         echo "# Initializing existing Amplify environment: ${ENV} (amplify init)"
-        [[ -z ${CATEGORIES} ]] && amplify init --amplify ${AMPLIFY} --providers ${PROVIDERS} --codegen ${CODEGEN} --yes --minify || amplify init --amplify ${AMPLIFY} --providers ${PROVIDERS} --codegen ${CODEGEN} --categories ${CATEGORIES} --yes --minify
+        [[ -z ${CATEGORIES} ]] && amplify init --amplify ${AMPLIFY} --providers ${PROVIDERS} --codegen ${CODEGEN} --yes || amplify init --amplify ${AMPLIFY} --providers ${PROVIDERS} --codegen ${CODEGEN} --categories ${CATEGORIES} --yes
         echo "# Environment ${ENV} details:"
         amplify env get --name ${ENV}
     fi
@@ -99,7 +99,15 @@ CODEGEN="{\
 }"
 CATEGORIES=""
 if [[ -z ${AMPLIFY_FACEBOOK_CLIENT_ID} && -z ${AMPLIFY_GOOGLE_CLIENT_ID} && -z ${AMPLIFY_AMAZON_CLIENT_ID} ]]; then
-    CATEGORIES=""
+-    CATEGORIES=""
++    AUTHCONFIG="{\
++   \"userPoolId\":\"${AMPLIFY_USERPOOL_ID}\",\
++    \"webClientId\":\"${AMPLIFY_WEBCLIENT_ID}\",\
++    \"nativeClientId\":\"${AMPLIFY_NATIVECLIENT_ID}\"\
++    }"
++    CATEGORIES="{\
++    \"auth\":$AUTHCONFIG\
++    }"
 else
     AUTHCONFIG="{\
     \"facebookAppIdUserPool\":\"${AMPLIFY_FACEBOOK_CLIENT_ID}\",\
