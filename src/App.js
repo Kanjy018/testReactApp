@@ -56,7 +56,10 @@ export default function App() {
       <div>
         <button style={{marginTop: "30px"}} onClick={uploadFile}>Upload File</button>
       </div>
-      {fileStatus ? "File uploaded successfully" : ""}
+      <div style={{marginTop: "30px"}}>
+        {fileStatus ? "File uploaded successfully" : ""}
+      </div>
+      
       
       <button className="signOutbtn" onClick={signOut}>Sign out</button>
       <withAuthenticator />
