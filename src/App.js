@@ -7,7 +7,6 @@ import { Header } from "./Header"
 
 const components = {
   Header,
-
 };
 
 const formFields = {
@@ -46,7 +45,7 @@ export default function App() {
       <Flex justifyContent="center">
         <Image
           alt="logo"
-          src= {require("./photos/nuber_header.PNG")}
+          src={require("./photos/nuber_header.PNG")}
         />
       </Flex>
       <div>
