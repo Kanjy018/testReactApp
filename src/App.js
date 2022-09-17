@@ -50,7 +50,7 @@ export default function App() {
         />
       </Flex>
       <div>
-        <p>Please upload your drivers licence</p>
+        <p>Please upload your drivers licence.</p>
         <input type="file" onChange={(e) => setFileData(e.target.files[0])} />
       </div>
       <div>
