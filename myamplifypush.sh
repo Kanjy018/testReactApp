@@ -3,7 +3,7 @@ set -e
 IFS='|'
 
 help_output () {
-    echo "usage: amplify-push <--environment|-e staging <--simple|-s>"
+    echo "usage: amplify-push <--environment|-e staging> <--simple|-s>"
     echo "  --environment  The name of the Amplify environment to use"
     echo "  --simple  Optional simple flag auto-includes stack info from env cache"
     exit 1
