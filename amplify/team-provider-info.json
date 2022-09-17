@@ -13,7 +13,15 @@
     },
     "categories": {
       "auth": {
-        "assignment1cloud19bd8194": {}
+        "assignment1cloud19bd8194": {},
+        "Assignment1Cloud": {},
+        "true": {},
+        "assignment1cloud": {
+          "userPoolId": "us-west-1_rtrDvol9k",
+          "userPoolName": "User Pool Nuber Working",
+          "webClientId": "20uhdhvckh7dnssn9jtjia9ah3",
+          "nativeClientId": "20uhdhvckh7dnssn9jtjia9ah3"
+        }
       }
     }
   }

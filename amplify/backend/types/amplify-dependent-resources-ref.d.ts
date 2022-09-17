@@ -1,15 +1,4 @@
 export type AmplifyDependentResourcesAttributes = {
-    "auth": {
-        "assignment1cloud19bd8194": {
-            "IdentityPoolId": "string",
-            "IdentityPoolName": "string",
-            "UserPoolId": "string",
-            "UserPoolArn": "string",
-            "UserPoolName": "string",
-            "AppClientIDWeb": "string",
-            "AppClientID": "string"
-        }
-    },
     "storage": {
         "imagestorage": {
             "BucketName": "string",
@@ -21,6 +10,13 @@ export type AmplifyDependentResourcesAttributes = {
             "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
+        }
+    },
+    "analytics": {
+        "assignment1cloud": {
+            "Region": "string",
+            "Id": "string",
+            "appName": "string"
         }
     }
 }

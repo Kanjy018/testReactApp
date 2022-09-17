@@ -1,28 +1,11 @@
 {
   "auth": {
-    "assignment1cloud19bd8194": {
+    "assignment1cloud": {
       "service": "Cognito",
+      "serviceType": "imported",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
-      "customAuth": false,
-      "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      }
+      "customAuth": false
     }
   },
   "storage": {
@@ -50,6 +33,12 @@
           "additionalAuthenticationProviders": []
         }
       }
+    }
+  },
+  "analytics": {
+    "assignment1cloud": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

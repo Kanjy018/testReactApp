@@ -1,9 +1,28 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "./App.css" 
 import { API, Storage } from "aws-amplify";
-import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+import { Authenticator, useTheme, Image, View, Flex} from "@aws-amplify/ui-react";
+import '@aws-amplify/ui-react/styles.css';
+import { Header } from "./Header"
 
-function App() {
+const components = {
+  Header,
+
+};
+
+const formFields = {
+  signUp: {
+    Driver: {
+      labelHidden: false,
+      placeholder: 'Driver/Customer',
+      isRequired: true,
+      label: 'Sign-up to become a Nüber driver?',
+    }
+  }
+};
+
+export default function App() {
+  const {tokens} = useTheme();
 
   const [fileData, setFileData] = useState();
   const [fileStatus, setFileStatus] = useState(false);
@@ -14,26 +33,38 @@ function App() {
       contentType: fileData.type,
     });
     setFileStatus(true);
-    console.log(21, result);
   };
 
-
+  
   return (
+    <Authenticator 
+      components={components}
+      formFields={formFields}
+      >
+    {({ signOut, user }) => (
     <div className="App">
-      <h1>Nüber</h1>
-
+      <Flex justifyContent="center">
+        <Image
+          alt="logo"
+          src= {require("./photos/nuber_header.PNG")}
+        />
+      </Flex>
       <div>
-        <p>Testing file upload</p>
+        <p>Please upload your drivers licence</p>
         <input type="file" onChange={(e) => setFileData(e.target.files[0])} />
       </div>
       <div>
-        <button onClick={uploadFile}>Upload File</button>
+        <button style={{marginTop: "30px"}} onClick={uploadFile}>Upload File</button>
       </div>
       {fileStatus ? "File uploaded successfully" : ""}
-
-      <AmplifySignOut />
-    </div>
-  );
+      
+      <button className="signOutbtn" onClick={signOut}>Sign out</button>
+      <withAuthenticator />
+    </div> )}
+    </Authenticator>
+    );
 }
 
-export default withAuthenticator(App);
+
+
+
